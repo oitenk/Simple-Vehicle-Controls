@@ -1,9 +1,10 @@
 # Simple Vehicle Controls
 
-One key each for the doors, windows, hood and trunk of the car you are in, or the one you are looking at. Built it with Claude (the AI).
+One key each for the engine, doors, windows, hood and trunk of the car you are in, or the one you are looking at. Built it with Claude (the AI).
 
 | Key | Does |
 |---|---|
+| Numpad 2 | Engine on / off |
 | Numpad 8 | Hood open / close |
 | Numpad 5 | Trunk open / close |
 | Numpad 4 | Left door open / close |

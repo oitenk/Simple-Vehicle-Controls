@@ -1,4 +1,4 @@
-// Simple Vehicle Controls: one key each for the doors, windows, hood and trunk of
+// Simple Vehicle Controls: one key each for the engine, doors, windows, hood and trunk of
 // the car you are in, or the one you are looking at. The keys are set in Mod Settings.
 module SimpleVehicleControls
 
@@ -32,6 +32,11 @@ public class SVCSettings {
   @runtimeProperty("ModSettings.category", "Key Bindings")
   @runtimeProperty("ModSettings.displayName", "Right window up / down")
   public let rightWindowKey: EInputKey = EInputKey.IK_NumPad9;
+
+  @runtimeProperty("ModSettings.mod", "Simple Vehicle Controls")
+  @runtimeProperty("ModSettings.category", "Key Bindings")
+  @runtimeProperty("ModSettings.displayName", "Engine on / off")
+  public let engineKey: EInputKey = EInputKey.IK_NumPad2;
 }
 
 public class SVCSystem extends ScriptableSystem {
@@ -58,7 +63,8 @@ public class SVCSystem extends ScriptableSystem {
     if Equals(key, EInputKey.IK_None) { return; }
     let s: ref<SVCSettings> = this.m_settings;
     if !Equals(key, s.hoodKey) && !Equals(key, s.trunkKey) && !Equals(key, s.leftDoorKey)
-        && !Equals(key, s.rightDoorKey) && !Equals(key, s.leftWindowKey) && !Equals(key, s.rightWindowKey) {
+        && !Equals(key, s.rightDoorKey) && !Equals(key, s.leftWindowKey) && !Equals(key, s.rightWindowKey)
+        && !Equals(key, s.engineKey) {
       return;
     }
     let game: GameInstance = this.GetGameInstance();
@@ -72,6 +78,7 @@ public class SVCSystem extends ScriptableSystem {
     if Equals(key, s.rightDoorKey) { this.ToggleDoor(vehicle, EVehicleDoor.seat_front_right, n"seat_front_right"); }
     if Equals(key, s.leftWindowKey) { this.ToggleWindow(vehicle, true); }
     if Equals(key, s.rightWindowKey) { this.ToggleWindow(vehicle, false); }
+    if Equals(key, s.engineKey) { vehicle.TurnEngineOn(!vehicle.IsEngineTurnedOn()); }
   }
 
   // Not while a menu or photo mode is up, so typing in a menu does nothing to the car.
